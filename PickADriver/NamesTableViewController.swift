@@ -10,10 +10,11 @@ import UIKit
 class NamesTableViewController: UITableViewController {
 
     var names = ["Felix", "Steven", "Elvis", "Sam", "Nathan", "Toren", "George", "Aiden"]
-    
+    var period = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Period \(period)"
 
         tableView.isEditing = true
     }
