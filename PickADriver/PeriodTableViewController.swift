@@ -7,11 +7,12 @@
 
 import UIKit
 
+let savedNamesUserDefaultsKey = "names"
+
 class PeriodTableViewController: UITableViewController {
 
-    var selectedPeriod = 0
-    var names = [["Alice", "Felix", "Steven", "Elvis", "Sam", "Nathan", "Toren", "George", "Aiden"], ["Scott", "Felix", "Steven", "Elvis", "Sam", "Nathan", "Toren", "George", "Aiden"], ["Kelly", "Felix", "Steven", "Elvis", "Sam", "Nathan", "Toren", "George", "Aiden"], ["Ryan", "Felix", "Steven", "Elvis", "Sam", "Nathan", "Toren", "George", "Aiden"], ["Kris", "Felix", "Steven", "Elvis", "Sam", "Nathan", "Toren", "George", "Aiden"], ["DJ", "Felix", "Steven", "Elvis", "Sam", "Nathan", "Toren", "George", "Aiden"], ["Hilary", "Felix", "Steven", "Elvis", "Sam", "Nathan", "Toren", "George", "Aiden"], ["Bethany", "Felix", "Steven", "Elvis", "Sam", "Nathan", "Toren", "George", "Aiden"]]
-    var selectedNames: [String] = []
+    var selectedPeriod = "0"
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,9 +25,9 @@ class PeriodTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        selectedPeriod = indexPath.row + 1
-        selectedNames = names[indexPath.row]
-        performSegue(withIdentifier: "PeriodToNames", sender: nil)
+        selectedPeriod = String(indexPath.row + 1)
+       
+        performSegue(withIdentifier: "PeriodToDriverSelect", sender: nil)
     }
 
     
@@ -34,12 +35,16 @@ class PeriodTableViewController: UITableViewController {
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let namesTableVC = segue.destination as? NamesTableViewController {
-            namesTableVC.names = selectedNames
-            namesTableVC.period = selectedPeriod
+        if let driverSelectVC = segue.destination as? DriverSelectCollectionViewController {
+         
+            driverSelectVC.period = selectedPeriod
+            
         }
+        
+       
     
     }
     
 
+    
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1290A1B7261F5B8500718E4E /* DriverSelectCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1290A1B6261F5B8500718E4E /* DriverSelectCollectionViewController.swift */; };
 		129B3FBF260B90AF00CF0DD9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129B3FBE260B90AF00CF0DD9 /* AppDelegate.swift */; };
 		129B3FC1260B90AF00CF0DD9 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 129B3FC0260B90AF00CF0DD9 /* SceneDelegate.swift */; };
 		129B3FC6260B90AF00CF0DD9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 129B3FC4260B90AF00CF0DD9 /* Main.storyboard */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		1290A1B6261F5B8500718E4E /* DriverSelectCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverSelectCollectionViewController.swift; sourceTree = "<group>"; };
 		129B3FBB260B90AF00CF0DD9 /* PickADriver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PickADriver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		129B3FBE260B90AF00CF0DD9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		129B3FC0260B90AF00CF0DD9 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +63,7 @@
 				129B3FBE260B90AF00CF0DD9 /* AppDelegate.swift */,
 				129B3FC0260B90AF00CF0DD9 /* SceneDelegate.swift */,
 				129B3FC4260B90AF00CF0DD9 /* Main.storyboard */,
+				1290A1B6261F5B8500718E4E /* DriverSelectCollectionViewController.swift */,
 				12B0C2C22614CC9200E343DF /* PeriodTableViewController.swift */,
 				129B3FD4260B927F00CF0DD9 /* NamesTableViewController.swift */,
 				129B3FC7260B90B500CF0DD9 /* Assets.xcassets */,
@@ -143,6 +146,7 @@
 				12B0C2C32614CC9200E343DF /* PeriodTableViewController.swift in Sources */,
 				129B3FBF260B90AF00CF0DD9 /* AppDelegate.swift in Sources */,
 				129B3FD5260B927F00CF0DD9 /* NamesTableViewController.swift in Sources */,
+				1290A1B7261F5B8500718E4E /* DriverSelectCollectionViewController.swift in Sources */,
 				129B3FC1260B90AF00CF0DD9 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
