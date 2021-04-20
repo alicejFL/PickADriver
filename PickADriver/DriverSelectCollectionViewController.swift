@@ -16,6 +16,7 @@ class DriverSelectCollectionViewController: UICollectionViewController {
     var isSelectingDriver = false
     var timer = Timer()
     var classList: [String] = []
+    var delay: TimeInterval = 0.2
     
     @IBOutlet var editButton: UIBarButtonItem!
     @IBOutlet var playButton: UIBarButtonItem!
@@ -37,7 +38,7 @@ class DriverSelectCollectionViewController: UICollectionViewController {
         else {
             playButton.image = UIImage(systemName: "stop.fill")
             playButton.tintColor = .systemRed
-            timer = .scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(eliminateDriver), userInfo: nil, repeats: true)
+            timer = .scheduledTimer(timeInterval: delay, target: self, selector: #selector(eliminateDriver), userInfo: nil, repeats: false)
             
         }
         
@@ -134,10 +135,23 @@ class DriverSelectCollectionViewController: UICollectionViewController {
         let next = Int.random(in: 0..<names.count)
         names.remove(at: next)
             collectionView.deleteItems(at: [IndexPath(item: next, section: 0)])
+            delay += 0.2
+            timer = .scheduledTimer(timeInterval: delay, target: self, selector: #selector(eliminateDriver), userInfo: nil, repeats: false)
         }
         else {
             timer.invalidate()
             collectionView.reloadItems(at: [IndexPath(item: 0, section: 0)])
+            let name = names[0]
+            classList.remove(at: classList.firstIndex(of: name)!)
+            classList.append(name)
+            save()
+        }
+    }
+    
+    func save() {
+        if var savedNames = UserDefaults.standard.value(forKey: savedNamesUserDefaultsKey) as? [String: [String]] {
+            savedNames[period] = classList
+            UserDefaults.standard.set(savedNames, forKey: savedNamesUserDefaultsKey)
         }
     }
 
