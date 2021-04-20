@@ -10,25 +10,47 @@ import UIKit
 private let reuseIdentifier = "StudentNameCell"
 
 class DriverSelectCollectionViewController: UICollectionViewController {
+    
     var names: [String] = []
- var period = "0"
+    var period = "0"
+    var isSelectingDriver = false
+    var timer = Timer()
+    var classList: [String] = []
+    
+    @IBOutlet var editButton: UIBarButtonItem!
+    @IBOutlet var playButton: UIBarButtonItem!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
         
     }
 
+    @IBAction func onPlayTapped(_ sender: Any) {
+        if isSelectingDriver {
+            playButton.image = UIImage(systemName: "play.fill")
+            playButton.tintColor = .systemGreen
+            timer.invalidate()
+            names = classList
+            collectionView.reloadData()
+        }
+        else {
+            playButton.image = UIImage(systemName: "stop.fill")
+            playButton.tintColor = .systemRed
+            timer = .scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(eliminateDriver), userInfo: nil, repeats: true)
+            
+        }
+        
+        isSelectingDriver = !isSelectingDriver
+        editButton.isEnabled = !isSelectingDriver
+    }
     
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let namesTableVC = segue.destination as? NamesTableViewController {
-            namesTableVC.names = names
+            namesTableVC.names = classList
             namesTableVC.period = period
         }
     }
@@ -54,8 +76,11 @@ class DriverSelectCollectionViewController: UICollectionViewController {
             textLabel.text = studentName
         }
         print(studentName)
-        cell.contentView.backgroundColor = .lightGray
-        // Configure the cell
+        if names.count == 1 {
+            cell.contentView.backgroundColor = .systemYellow
+        } else {
+            cell.contentView.backgroundColor = .lightGray
+        }
     
         return cell
     }
@@ -94,11 +119,25 @@ class DriverSelectCollectionViewController: UICollectionViewController {
         super.viewWillAppear(animated)
         if let savedNames = UserDefaults.standard.value(forKey: savedNamesUserDefaultsKey) as? [String:[String]] {
             names = savedNames[period] ?? []
+            classList = names
             collectionView.reloadData()
         }
         else {
             let empty: [String:[String]] = [:]
             UserDefaults.standard.set(empty, forKey: savedNamesUserDefaultsKey)
+        }
+        playButton.isEnabled = names.count > 1
+    }
+    
+    @objc func eliminateDriver() {
+        if names.count > 1 {
+        let next = Int.random(in: 0..<names.count)
+        names.remove(at: next)
+            collectionView.deleteItems(at: [IndexPath(item: next, section: 0)])
+        }
+        else {
+            timer.invalidate()
+            collectionView.reloadItems(at: [IndexPath(item: 0, section: 0)])
         }
     }
 
