@@ -86,6 +86,12 @@ class DriverSelectCollectionViewController: UICollectionViewController {
         return cell
     }
 
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        names.remove(at: indexPath.row)
+        collectionView.deleteItems(at: [indexPath])
+    }
+    
+    
     // MARK: UICollectionViewDelegate
 
     /*
